@@ -37,7 +37,19 @@ public class Customer {
 	 */
 	@Column(nullable=true,length=50)
 	private String nickName;
+	/**
+	 * 生日
+	 * 1990-01-02
+	 */
+	@Column(nullable=true,length=10)
+	private String birthDay;
 	
+	public String getBirthDay() {
+		return birthDay;
+	}
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
 	public Long getId() {
 		return id;
 	}

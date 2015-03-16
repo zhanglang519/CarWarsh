@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.cqu.carwarsh.domains.Customer;
 /**
- * 对Customer表的数据操作
+ * 对Customer表的CRUD操作
  * @author liuji
  *
  */

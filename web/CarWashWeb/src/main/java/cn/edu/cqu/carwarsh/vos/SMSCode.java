@@ -12,7 +12,7 @@ public class SMSCode {
 	/**
 	 * 验证码值
 	 */
-	private String value;
+	private String value="";
 	/**
 	 * 创建时间
 	 */
@@ -38,7 +38,7 @@ public class SMSCode {
 		Date now=new Date();
 		Long time=now.getTime()-created.getTime();
 		//默认10分钟后过期
-		return time<=60000;
+		return time<=600000;
 	}
 	/**
 	 * 验证码是否在1分钟之前创建
@@ -48,7 +48,7 @@ public class SMSCode {
 	{
 		Date now=new Date();
 		Long time=now.getTime()-created.getTime();
-		return time>6000;
+		return time>60000;
 	}
 	public String getValue() {
 		return value;

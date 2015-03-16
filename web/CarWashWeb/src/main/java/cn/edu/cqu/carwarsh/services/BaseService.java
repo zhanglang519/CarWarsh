@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 
 public class BaseService {
-	protected HibernateTemplate ht;
+	private HibernateTemplate ht;
 
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
