@@ -231,18 +231,17 @@ public class CustomerController {
 			if(customer.getPwd().equals(pwd)){
 				customer.setPwd(newPwd);
 				customerService.edit(customer);
-				
+				result.setMsg("密码修改成功");
+				result.setState(true);
 			}else{
-				
+				result.setMsg("原始密码输入错误");
+				result.setState(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setMsg("手机号码错误");
 			result.setState(true);
 		}
-		
-		result.setMsg("密码修改成功");
-		result.setState(true);
 		return result;
 	}
 
@@ -299,7 +298,7 @@ public class CustomerController {
 	@RequestMapping(value = "/customer/resetPwd.do")
 	public JSONResult resetPwd(String mobile, String code, String newPwd) {
 		JSONResult result = new JSONResult();
-		SMSCode smsCode = registerCodes.get(mobile);
+		SMSCode smsCode = forgetCodes.get(mobile);
 		if (smsCode == null || !smsCode.getValue().equals(code)
 				|| !smsCode.isValid()) {
 			result.setMsg("验证码不合法");
@@ -313,7 +312,7 @@ public class CustomerController {
 				result.setState(true);
 			} catch (Exception e) {
 				e.printStackTrace();
-				result.setMsg("服务器异常，密码修改失败");
+				result.setMsg("手机号码错误");
 				result.setState(false);
 			}
 		}
