@@ -23,9 +23,8 @@ public class Order {
 	 * 与用户关联
 	 */
 	@ManyToOne(optional = false)
-	// TODO 添加其他属性
 	private Customer customer;
-
+	// TODO 添加其他属性
 	public Long getId() {
 		return id;
 	}

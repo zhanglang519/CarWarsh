@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 /**
- * 车辆品牌
+ * 管理人员
  * @author liuji
  *
  */
 @Entity
-public class VehicleBrand {
+public class Manager {
 	/**
 	 * 逻辑主键，自增长
 	 */
@@ -18,20 +18,32 @@ public class VehicleBrand {
 	@GeneratedValue
 	private Long id;
 	/**
-	 * 品牌名，例如福特
+	 * 管理人员号，登录名，物理主键
 	 */
-	@Column(nullable=false,unique=true,length=50)
-	private String name;
+	@Column(nullable=false,unique=true,length=6)
+	private String mid;
 	/**
-	 * 品牌名拼音首字母
+	 * 密码，经过MD5加密,长度50位
 	 */
-	@Column(nullable=false,length=1)
-	private String pinyin;
+	@Column(nullable=false,length=50)
+	private String pwd;
+	/**
+	 * 姓名
+	 */
+	@Column(nullable=true,length=50)
+	private String name;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getName() {
 		return name;
@@ -39,17 +51,17 @@ public class VehicleBrand {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPinyin() {
-		return pinyin;
+	public String getMid() {
+		return mid;
 	}
-	public void setPinyin(String pinyin) {
-		this.pinyin = pinyin;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((mid == null) ? 0 : mid.hashCode());
 		return result;
 	}
 	@Override
@@ -60,13 +72,14 @@ public class VehicleBrand {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VehicleBrand other = (VehicleBrand) obj;
-		if (name == null) {
-			if (other.name != null)
+		Manager other = (Manager) obj;
+		if (mid == null) {
+			if (other.mid != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!mid.equals(other.mid))
 			return false;
 		return true;
 	}
+	
 	
 }

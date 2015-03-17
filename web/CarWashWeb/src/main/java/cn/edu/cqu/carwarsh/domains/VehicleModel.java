@@ -5,12 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 /**
  * 车辆型号
  * @author liuji
  *
  */
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name","brand_id" }) })
 public class VehicleModel {
 
 		/**
@@ -24,6 +27,11 @@ public class VehicleModel {
 		 */
 		@ManyToOne(optional=false)
 		private VehicleBrand brand;
+		/**
+		 * 车辆类型关联
+		 */
+		@ManyToOne(optional=false)
+		private VehicleCategory category;
 		/**
 		 * 车型名，例如福克斯
 		 */

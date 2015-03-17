@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 /**
- * 车辆品牌
+ * 洗车类型
  * @author liuji
  *
  */
 @Entity
-public class VehicleBrand {
+public class WarshType {
 	/**
 	 * 逻辑主键，自增长
 	 */
@@ -18,15 +18,10 @@ public class VehicleBrand {
 	@GeneratedValue
 	private Long id;
 	/**
-	 * 品牌名，例如福特
+	 * 洗车类型名
 	 */
 	@Column(nullable=false,unique=true,length=50)
 	private String name;
-	/**
-	 * 品牌名拼音首字母
-	 */
-	@Column(nullable=false,length=1)
-	private String pinyin;
 	public Long getId() {
 		return id;
 	}
@@ -38,12 +33,6 @@ public class VehicleBrand {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getPinyin() {
-		return pinyin;
-	}
-	public void setPinyin(String pinyin) {
-		this.pinyin = pinyin;
 	}
 	@Override
 	public int hashCode() {
@@ -60,7 +49,7 @@ public class VehicleBrand {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VehicleBrand other = (VehicleBrand) obj;
+		WarshType other = (WarshType) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
