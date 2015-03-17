@@ -226,6 +226,21 @@ public class CustomerController {
 	@RequestMapping(value = "/customer/changePwd.do")
 	public JSONResult changePwd(String mobile, String pwd, String newPwd) {
 		JSONResult result = new JSONResult();
+		try {
+			Customer customer= customerService.findByMobile(mobile);
+			if(customer.getPwd().equals(pwd)){
+				customer.setPwd(newPwd);
+				customerService.edit(customer);
+				
+			}else{
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setMsg("手机号码错误");
+			result.setState(true);
+		}
+		
 		result.setMsg("密码修改成功");
 		result.setState(true);
 		return result;
@@ -245,8 +260,28 @@ public class CustomerController {
 		// 将验证码发送到用户的手机，返回true
 		// 若上述逻辑执行异常返回false
 		JSONResult result = new JSONResult();
-		result.setMsg("验证码生成成功");
-		result.setState(true);
+		
+		SMSCode code = forgetCodes.get(mobile);
+		if (code != null && !code.isAfter1m()) {
+
+			result.setMsg("1分钟内不能申请新验证码");
+			result.setState(false);
+
+		} else {
+			code = new SMSCode();
+			forgetCodes.put(mobile, code);
+			logger.debug("为手机{}生成的验证码为{}",
+					new Object[] { mobile, code.getValue() });
+
+			if (sendSMSCode(mobile, code.getValue())) {
+				result.setMsg("验证码生成成功");
+				result.setState(true);
+			} else {
+				result.setMsg("验证码发送失败");
+				result.setState(false);
+			}
+		}
+		
 		return result;
 	}
 
@@ -264,8 +299,24 @@ public class CustomerController {
 	@RequestMapping(value = "/customer/resetPwd.do")
 	public JSONResult resetPwd(String mobile, String code, String newPwd) {
 		JSONResult result = new JSONResult();
-		result.setMsg("重置密码成功");
-		result.setState(true);
+		SMSCode smsCode = registerCodes.get(mobile);
+		if (smsCode == null || !smsCode.getValue().equals(code)
+				|| !smsCode.isValid()) {
+			result.setMsg("验证码不合法");
+			result.setState(false);
+		} else {
+			try {
+				Customer customer = customerService.findByMobile(mobile);
+				customer.setPwd(newPwd);
+				customerService.edit(customer);
+				result.setMsg("重置密码成功");
+				result.setState(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.setMsg("服务器异常，密码修改失败");
+				result.setState(false);
+			}
+		}
 		return result;
 	}
 }
