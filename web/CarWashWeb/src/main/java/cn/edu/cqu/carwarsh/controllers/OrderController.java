@@ -5,22 +5,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.edu.cqu.carwarsh.services.AddressService;
 import cn.edu.cqu.carwarsh.services.CustomerService;
+import cn.edu.cqu.carwarsh.services.OrderService;
 /**
- * 用户常用洗车地址服务端接口
+ * 订单操作服务端接口
  * @author liuji
  *
  */
 @RestController
-public class AddressController {
+public class OrderController {
 	/**
 	 * 用于输出日志
 	 */
 	private static Logger logger = LoggerFactory
-			.getLogger(AddressController.class);
+			.getLogger(OrderController.class);
 	@Autowired
-	private AddressService addressService;
+	private OrderService orderService;
 	@Autowired
 	private CustomerService customerService;
 }

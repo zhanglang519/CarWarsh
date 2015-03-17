@@ -5,26 +5,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.edu.cqu.carwarsh.services.CarService;
+import cn.edu.cqu.carwarsh.services.CouponService;
 import cn.edu.cqu.carwarsh.services.CustomerService;
-
 /**
- * 用户常用洗车车辆的基本操作，包括添加、删除、修改、查看
- * 
+ * 优惠券操作服务端接口
  * @author liuji
  *
  */
 @RestController
-public class CarController {
-
+public class CouponController {
 	/**
 	 * 用于输出日志
 	 */
 	private static Logger logger = LoggerFactory
-			.getLogger(CustomerController.class);
+			.getLogger(CouponController.class);
 	@Autowired
-	private CarService carService;
+	private CouponService couponService;
 	@Autowired
 	private CustomerService customerService;
-
 }
