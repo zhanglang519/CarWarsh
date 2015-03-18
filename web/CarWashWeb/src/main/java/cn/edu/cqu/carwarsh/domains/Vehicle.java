@@ -1,9 +1,11 @@
 package cn.edu.cqu.carwarsh.domains;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 /**
  * 用户常用车辆信息
  * @author liuji
@@ -22,6 +24,25 @@ public class Vehicle {
 	 */
 	@ManyToOne(optional=false)
 	private Customer customer;
+	/**
+	 * 与车辆型号关联
+	 */
+	@ManyToOne(optional=false)
+	private VehicleModel vehicleModel;
+	
+	/**
+	 * 
+	 * 车牌号
+	 */
+	@Column(nullable=false,length=20)
+	private String licenseNumber;
+	/**
+	 * 
+	 * 车辆颜色
+	 */
+	@Column(nullable=true,length=20)
+	private String color;
+	
 	//TODO 添加其他属性
 	public Long getId() {
 		return id;
@@ -35,4 +56,11 @@ public class Vehicle {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	public VehicleModel getVehicleModel() {
+		return vehicleModel;
+	}
+	public void setVehicleModel(VehicleModel vehicleModel) {
+		this.vehicleModel = vehicleModel;
+	}
+	
 }
