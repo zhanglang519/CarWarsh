@@ -228,18 +228,18 @@ public class CustomerController {
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer= customerService.findByMobile(mobile);
-			if(customer.getPwd().equals(pwd)){
+			if(customer!=null&&customer.getPwd().equals(pwd)){
 				customer.setPwd(newPwd);
 				customerService.edit(customer);
 				result.setMsg("密码修改成功");
 				result.setState(true);
 			}else{
-				result.setMsg("原始密码输入错误");
+				result.setMsg("用户不存在或者密码错误");
 				result.setState(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setMsg("手机号码错误");
+			result.setMsg("服务器异常，密码修改失败");
 			result.setState(true);
 		}
 		return result;
@@ -312,10 +312,21 @@ public class CustomerController {
 				result.setState(true);
 			} catch (Exception e) {
 				e.printStackTrace();
-				result.setMsg("手机号码错误");
+				result.setMsg("服务器异常，重置密码失败");
 				result.setState(false);
 			}
 		}
 		return result;
+	}
+	/**
+	 * 获取用户信息
+	 * @param mobile 手机号
+	 * @param pwd 密码
+	 * @return 用户信息
+	 */
+	public Customer getCustomer(String mobile,String pwd)
+	{
+		//TODO 待实现
+		return null;
 	}
 }
