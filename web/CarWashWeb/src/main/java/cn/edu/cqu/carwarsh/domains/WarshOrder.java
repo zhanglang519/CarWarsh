@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class Order {
+public class WarshOrder {
 	/**
 	 * 逻辑主键，自增长
 	 */
